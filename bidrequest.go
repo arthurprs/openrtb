@@ -1,7 +1,6 @@
 package openrtb
 
 import (
-	"encoding/json"
 	"errors"
 )
 
@@ -30,9 +29,14 @@ type BidRequest struct {
 	Bcat        []string        `json:"bcat,omitempty"`    // Blocked Advertiser Categories.
 	BAdv        []string        `json:"badv,omitempty"`    // Array of strings of blocked toplevel domains of advertisers
 	Regs        *Regulations    `json:"regs,omitempty"`
-	Ext         json.RawMessage `json:"ext,omitempty"`
+	Ext         BidRequestExt   `json:"ext,omitempty"`
+}
 
-	Pmp *Pmp `json:"pmp,omitempty"` // DEPRECATED: kept for backwards compatibility
+// BidSwitch specific BidRequest Ext Object
+type BidRequestExt struct {
+	Ssp string `json:"ssp"`
+	Clktrkrq int `json:"clktrkrq"`
+	// TODO other fields
 }
 
 // Validates the request
